@@ -15,10 +15,12 @@ pipeline {
                     sh "docker build -t ${IMAGE_NAME} ."
                     echo 'Image built, Now pushing to docker registry....'
                     
-                    docker.withRegistry('https://index.docker.io/v1','docker-credentials') {
+                    sh "echo ${DOCKER_PASS} | docker login -u ${DOCKER_USER} --password-stdin"
+                    sh "docker push thethymca/next-node-js-app:4"
+                    // docker.withRegistry('https://index.docker.io/v1','docker-credentials') {
                     // docker.withDockerRegistry('https://index.docker.io/v1','docker-credentials') {
-                        sh "docker push ${IMAGE_NAME}"
-                    }
+                    //    sh "docker push ${IMAGE_NAME}"
+                    // }
                     echo 'Docker image pushed successfully!'
                 }
             }
