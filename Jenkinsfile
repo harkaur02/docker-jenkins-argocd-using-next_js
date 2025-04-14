@@ -21,10 +21,10 @@ pipeline {
                 }
             }
         }
-        post [
+        post {
             success {
                 build job: 'k8s-manifest-pipeline'
             }
-        ]       
+        }       
     }
 }
