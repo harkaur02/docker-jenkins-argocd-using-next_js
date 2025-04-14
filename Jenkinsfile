@@ -17,7 +17,7 @@ pipeline {
                     docker.withRegistry('https://index.docker.io/v1','docker-credentials') {
                         sh "docker push ${IMAGE_NAME}"
                     }
-                    ehco 'Docker image pushed successfully!'
+                    echo 'Docker image pushed successfully!'
                 }
             }
         }       
