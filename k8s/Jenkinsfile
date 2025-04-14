@@ -10,7 +10,7 @@ pipeline {
                 script {
                     //catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                         withCredentials([usernamePassword(
-                            credentialsID: 'git-credentials',
+                            credentialsId: 'git-credentials',
                             usernameVariable: 'GIT_USERNAME',
                             passwordVariable: 'GIT_PASSWORD'
                         )]) {
