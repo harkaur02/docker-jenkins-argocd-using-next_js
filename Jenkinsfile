@@ -28,34 +28,19 @@ pipeline {
         stage('docker push') {
             steps {
                 echo 'starting to push image here ...'
-                script {
-                    echo "DOCKER_USER:"
-                    echo $DOCKER_USER
-                    echo $DOCKER_PASS
-                }
+
                 withCredentials([usernamePassword(credentialsId: 'docker-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-                    sh '''
+                    sh """
                         echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
                         docker push $IMAGE_NAME
-                    '''
+                    """
                 }
             }
         }
-        /* stage('docker push') {
-            steps {
-                echo 'starting to push image here ...'
-                withCredentials([usernamePassword(credentialsId: 'docker-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
-                    sh '''
-                        echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-                        docker push $IMAGE_NAME
-                    '''
-                }
-            }
-        } */
     }
-    post {
+    /*post {
         success {
             build job: 'k8s-manifest-pipeline'
         }
-    }    
+    }  */  
 }
