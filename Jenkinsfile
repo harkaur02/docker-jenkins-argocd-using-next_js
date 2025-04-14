@@ -20,11 +20,11 @@ pipeline {
                     ehco 'Docker image pushed successfully!'
                 }
             }
-        }
-        post {
-            success {
-                build job: 'k8s-manifest-pipeline'
-            }
         }       
     }
+    post {
+        success {
+            build job: 'k8s-manifest-pipeline'
+        }
+    }    
 }
