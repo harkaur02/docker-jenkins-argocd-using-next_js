@@ -8,7 +8,7 @@ pipeline {
         stage ('Update Deployment Manifest file') {
             steps {
                 script {
-                    catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    //catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                         withCredentials([usernamePassword(
                             credentialsID: 'git-credentials',
                             usernameVariable: 'GIT_USERNAME',
@@ -34,7 +34,7 @@ pipeline {
                                 git push https://$GIT_USERNAME:$GIT_PASSWORD@github.com/$GIT_USERNAME/$GIT_REPO_NAME HEAD:master
                             """
                         }
-                    }
+                    //}
                 }
             }
         }
