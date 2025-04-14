@@ -1,7 +1,8 @@
 pipeline {
     agent any
     environment {
-        DOCKERTAG = ${BUILD_NUMBER}
+        DOCKERTAG = "${BUILD_NUMBER}"
+        GIT_REPO_NAME = "docker-jenkins-argocd-using-next_js"
     }
     stages {
         stage {
@@ -13,7 +14,7 @@ pipeline {
                             usernameVariable: 'GIT_USERNAME',
                             passwordVariable: 'GIT_PASSWORD'
                         )]) {
-                            sh '''
+                            sh """
                                 git config user.email "harkaur02@gmail.com"
                                 git config user.name "harkaur02"
 
@@ -29,7 +30,7 @@ pipeline {
                                 git commit -m "updated image tag to current $BUILD_NUMBER"
 
                                 git push https://$GIT_USERNAME:$GIT_PASSWORD@github.com/$GIT_USERNAME/$GIT_REPO_NAME HEAD:master
-                            '''
+                            """
                         }
                     }
                 }
