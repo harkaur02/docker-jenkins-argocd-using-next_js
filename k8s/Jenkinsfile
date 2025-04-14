@@ -5,7 +5,7 @@ pipeline {
         GIT_REPO_NAME = "docker-jenkins-argocd-using-next_js"
     }
     stages {
-        stage {
+        stage ('Update Deployment Manifest file') {
             steps {
                 script {
                     catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
@@ -20,6 +20,8 @@ pipeline {
 
                                 echo "deployment.yaml file before update"
                                 cat deployment.yaml
+
+                                //sed -i 's+thethymca/next-node-js-app:*+thethymca/next-node-js-app:'"$DOCKERTAG"'+g'
 
                                 sed -i 's+thethymca/next-node-js-app:*+thethymca/next-node-js-app:'"$DOCKERTAG"'+g' deployment.yaml
 
