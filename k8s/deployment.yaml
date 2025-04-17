@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: next-js
-        image: thethymca/next-node-js-app:"12"
+        image: thethymca/next-node-js-app:"4"
         ports:
         - containerPort: 3000
