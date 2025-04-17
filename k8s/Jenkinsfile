@@ -22,7 +22,9 @@ pipeline {
                                 echo "deployment.yaml file before update"
                                 cat k8s/deployment.yaml
 
-                                sed -i 's+thethymca/next-node-js-app:[^ ]*+thethymca/next-node-js-app:"$DOCKERTAG"+g' k8s/deployment.yaml
+                                sed -i 's+thethymca/next-node-js-app:.*+thethymca/next-node-js-app:$DOCKERTAG+g' k8s/deployment.yaml
+                                # sed -i 's+thethymca/next-node-js-app:*+thethymca/next-node-js-app:'"$DOCKERTAG"'+g' deployment.yaml
+
 
                                 echo "deployment.yaml file after update....."
                                 cat k8s/deployment.yaml
